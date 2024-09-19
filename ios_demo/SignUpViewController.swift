@@ -13,11 +13,11 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    private var isPasswoeordVisible = false
+//    private var isPasswoeordVisible = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPasswordToggle()
+//        setupPasswordToggle()
         // Do any additional setup after loading the view.
     }
     
@@ -38,10 +38,6 @@ class SignUpViewController: UIViewController {
     }
     
     // setup eye icon in the password text field
-    private func setupPasswordToggle() {
-        let eyeButton = UIButton(frame:)
-        
-    }
     
     /*
     // MARK: - Navigation
