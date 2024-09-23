@@ -38,6 +38,9 @@ final class ios_demoUITestsLaunchTests: XCTestCase {
         // testing: login button
         testLogin(app: app)
         
+        // testing: signup button
+        testSignup(app: app)
+        
         /*
         let app = XCUIApplication()
         app.launch()
@@ -64,6 +67,7 @@ final class ios_demoUITestsLaunchTests: XCTestCase {
         
     }
     
+    // login screen
     func testLogin(app: XCUIApplication) {
         let loginButtonLaunch = app.buttons["Login"]
         loginButtonLaunch.tap()
@@ -82,23 +86,19 @@ final class ios_demoUITestsLaunchTests: XCTestCase {
         XCTAssertEqual(loginButton.label, "Login")
         
         emailTextField.tap()
-        emailTextField.typeText("hellow@gmail.com")
+        emailTextField.typeText("hello@gmail.com")
         
         passwordTextField.tap()
         passwordTextField.typeText("123456")
         
         loginButton.tap()
         
-        let homeScreenText = app.staticTexts["Home Screen"]
-        XCTAssertTrue(homeScreenText.exists)
+        testHome(app: app)
         
-//        let backButton = app.buttons["Back"]
-//        backButton.tap()
+        let backButton = app.buttons["Back"]
+        XCTAssert(backButton.exists)
+        backButton.tap()
         
-//        loginButton.tap()
-//        
-//        let homeScreenText = app.staticTexts["Home Screen"]
-//        XCTAssertTrue(homeScreenText.exists)
     }
     
     // signup screen
@@ -119,9 +119,29 @@ final class ios_demoUITestsLaunchTests: XCTestCase {
         XCTAssertTrue(signupButton.exists)
         XCTAssertEqual(signupButton.label, "SignUp")
         
-        signupButton.tap()
+        emailTextField.tap()
+        emailTextField.typeText("xyz@gmail.com")
         
+        passwordTextField.tap()
+        passwordTextField.typeText("123456")
+        
+        signupButton.tap()
+
+        testHome(app: app)
+        
+        let backButton = app.buttons["Back"]
+        XCTAssert(backButton.exists)
+        backButton.tap()
+        
+    }
+    
+    // home screen
+    func testHome(app: XCUIApplication) {
         let homeScreenText = app.staticTexts["Home Screen"]
         XCTAssertTrue(homeScreenText.exists)
+        
+        let backButton = app.buttons["Back"]
+        XCTAssert(backButton.exists)
+        backButton.tap()
     }
 }
