@@ -19,15 +19,109 @@ final class ios_demoUITestsLaunchTests: XCTestCase {
 
     @MainActor
     func testLaunch() throws {
+        
+        let app = XCUIApplication()
+        app.launch()
+        
+        // testing: components exist or not
+        let welcomeText = app.staticTexts["Welcome to Spotlight One"]
+        XCTAssertTrue(welcomeText.exists)
+        
+        let loginButtonLaunch = app.buttons["login-button-launch"]
+        XCTAssertTrue(loginButtonLaunch.exists)
+        XCTAssertEqual(loginButtonLaunch.label, "Login")
+        
+        let signupButtonLaunch = app.buttons["signup-button-launch"]
+        XCTAssertTrue(signupButtonLaunch.exists)
+        XCTAssertEqual(signupButtonLaunch.label, "SignUp")
+        
+        // testing: login button
+        testLogin(app: app)
+        
+        /*
         let app = XCUIApplication()
         app.launch()
 
-        // Insert steps here to perform after app launch but before taking a screenshot,
-        // such as logging into a test account or navigating somewhere in the app
+        let loginButton = app.buttons["login-button"]
+        XCTAssertTrue(loginButton.exists)
+        XCTAssertEqual(loginButton.label, "Login")
+    
+        loginButton.tap()
+        
+        XCTAssertTrue(app.staticTexts["Welcome to Spotlight One"].exists)
+        
+        let emailTextField = app.textFields["t1"]
+        XCTAssertTrue(emailTextField.exists)
 
-        let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "Launch Screen"
-        attachment.lifetime = .keepAlways
-        add(attachment)
+        emailTextField.tap()
+        emailTextField.typeText("hellow@gmail.com")
+        
+        let password = app.secureTextFields["t-2"]
+        password.tap()
+        password.typeText("123456")
+         
+         */
+        
+    }
+    
+    func testLogin(app: XCUIApplication) {
+        let loginButtonLaunch = app.buttons["Login"]
+        loginButtonLaunch.tap()
+        
+        let welcomeText = app.staticTexts["Welcome to Spotlight One"]
+        XCTAssertTrue(welcomeText.exists)
+        
+        let emailTextField = app.textFields["email-text-field-login"]
+        XCTAssertTrue(emailTextField.exists)
+        
+        let passwordTextField = app.secureTextFields["password-text-field-login"]
+        XCTAssertTrue(passwordTextField.exists)
+        
+        let loginButton = app.buttons["Login"]
+        XCTAssertTrue(loginButton.exists)
+        XCTAssertEqual(loginButton.label, "Login")
+        
+        emailTextField.tap()
+        emailTextField.typeText("hellow@gmail.com")
+        
+        passwordTextField.tap()
+        passwordTextField.typeText("123456")
+        
+        loginButton.tap()
+        
+        let homeScreenText = app.staticTexts["Home Screen"]
+        XCTAssertTrue(homeScreenText.exists)
+        
+//        let backButton = app.buttons["Back"]
+//        backButton.tap()
+        
+//        loginButton.tap()
+//        
+//        let homeScreenText = app.staticTexts["Home Screen"]
+//        XCTAssertTrue(homeScreenText.exists)
+    }
+    
+    // signup screen
+    func testSignup(app: XCUIApplication) {
+        let signupButtonLaunch = app.buttons["SignUp"]
+        signupButtonLaunch.tap()
+        
+        let welcomeText = app.staticTexts["Welcome to Spotlight One"]
+        XCTAssertTrue(welcomeText.exists)
+        
+        let emailTextField = app.textFields["email-text-field-signup"]
+        XCTAssertTrue(emailTextField.exists)
+        
+        let passwordTextField = app.secureTextFields["password-text-field-signup"]
+        XCTAssertTrue(passwordTextField.exists)
+        
+        let signupButton = app.buttons["SignUp"]
+        XCTAssertTrue(signupButton.exists)
+        XCTAssertEqual(signupButton.label, "SignUp")
+        
+        signupButton.tap()
+        
+        let homeScreenText = app.staticTexts["Home Screen"]
+        XCTAssertTrue(homeScreenText.exists)
     }
 }
