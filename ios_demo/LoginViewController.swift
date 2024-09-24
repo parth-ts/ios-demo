@@ -10,30 +10,46 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField?
+    @IBOutlet weak var passwordTextField: UITextField?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func loginClicked(_ sender: UIButton) {
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
+    // login button functionality
+    func loginFunction(){
+        guard let email = emailTextField?.text, !email.isEmpty,
+              let password = passwordTextField?.text, !password.isEmpty
+        else {
+            print("Email or password is empty.")
+            return
+        }
         
         Auth.auth().signIn(withEmail: email, password: password) { firebaseResult, error in
             if let e = error {
                 print("error: ", e)
             } else {
-                print("sign up successful")
+                print("login successful")
                 // go to home screen
                 self.performSegue(withIdentifier: "goToNext", sender: self)
             }
         }
-        
     }
     
+    // click login button
+    @IBAction func loginClicked(_ sender: UIButton) {
+        loginFunction()
+    }
+    
+    // for testing
+    func setEmailTextField(text: String){
+        emailTextField?.text = text
+    }
+    func setPasswordTextField(text: String){
+        emailTextField?.text = text
+    }
     /*
     // MARK: - Navigation
 
